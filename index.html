@@ -105,6 +105,8 @@ header .tt{text-align:left}h2{font-size:clamp(20px,3.4vw,46px);font-weight:800;m
 .dk{display:grid;grid-template-columns:1fr 1fr;gap:6px}.dk>div{border:1px solid var(--line);border-left:3px solid #c00000;border-radius:6px;padding:4px 8px;background:#fff}.dk small{display:block;font-size:10.5px;color:#666;line-height:1.2}.dk b{font-size:14px}.dk>div.f1{border-left-color:#2e8b2e;background:#f1faf0}.dk>div.f2{border-left-color:#d4152a;background:#fff3f3}
 @media(max-width:1000px){.dg{grid-template-columns:1fr}}
 .shd{display:block;min-width:200px;max-width:240px;white-space:normal;font-size:11px;line-height:1.4;text-align:left}#offx td,#nqx td{font-size:12px;padding:5px 6px}#offx td:first-child,#offx th:first-child,#nqx td:first-child,#nqx th:first-child{position:sticky;left:0;z-index:2;background:#fff;box-shadow:1px 0 0 var(--line)}#offx th:first-child,#nqx th:first-child{background:var(--r)}.shd b{color:#8a0b16}
+.gh{display:grid;grid-template-columns:1fr 1fr;gap:10px}.gh label{font-weight:600;font-size:13px}.gh input{display:block;width:100%;margin-top:3px}@media(max-width:820px){.gh{grid-template-columns:1fr}}
+.foot{background:#ffd23f!important;color:#1f1f1f!important;font:600 14px/1.5 Barlow,"Segoe UI",Arial,sans-serif!important;padding:10px 16px!important;border-radius:6px!important}.foot .fr{background:#8a0b16!important;color:#ffd23f!important;font:800 14px/1.3 "Barlow Semi Condensed",Arial,sans-serif!important}
 </style></head><body>
 <header><button id="hb" onclick="document.body.classList.toggle('so')">☰</button><div class="lgw"><img id="lg" alt="India Post"></div><div class="tt"><h2><span>POSTAL WARRIOR</span> <em>PERFORMANCE DASHBOARD</em></h2><div class="sub" id="comp"></div></div><div class="tag">DELIVERING SERVICE<br>DELIVERING TRUST</div><div class="dt"><div class="dd">📅 <b id="asof"></b> <b id="tm"></b></div><div class="pill">HQ Region<br>Ahmedabad</div></div></header>
 <div id="app"><aside id="side"><nav id="nav"></nav></aside><div id="ct"><div id="ub"></div>
@@ -117,12 +119,18 @@ header .tt{text-align:left}h2{font-size:clamp(20px,3.4vw,46px);font-weight:800;m
 <section class="pane" id="p-nq"></section><section class="pane" id="p-n0"></section><section class="pane" id="p-n1"></section><section class="pane" id="p-n2"></section><section class="pane" id="p-n3"></section>
 <section class="pane" id="p-ver"><div class="ctl"><label><b>Select vertical summary:</b> <select id="vsel" onchange="vert()"></select></label><button class="b g" onclick="vex()">Export Excel (all)</button><small style="align-self:center;color:#555">One table per parameter · Qualified (%) = offices at that level or above ÷ offices applicable to that parameter</small></div><div id="vert"></div></section>
 <section class="pane" id="p-data">
-<div class="box"><h3 style="margin-top:0">Refresh data</h3>
-<p>Upload one Excel file that has two worksheets: <b>HO Details</b> and <b>SO Details</b> (same layout as <i>HOSO_Dashboard.xlsx</i>). The dashboard refreshes instantly.</p>
-<p style="background:#fff8e1;border:1px solid #f0d27a;border-radius:8px;padding:8px 12px"><b>For all visitors:</b> replace <code>HOSO_Dashboard.xlsx</code> in the GitHub repository with the new file (and edit <code>config.json</code> for the “As on” date / notes). Netlify republishes automatically and every visitor sees the update within a couple of minutes. Uploading a file below only changes <i>your own</i> browser view.</p><input type="file" id="fu" accept=".xlsx,.xls"><p id="msg"></p>
+<div style="display:none"><p style="background:#fff8e1;border:1px solid #f0d27a;border-radius:8px;padding:8px 12px"><b>For all visitors:</b> use <b>Publish to GitHub</b> below. The upload here only changes <i>your own</i> browser view.</p><input type="file" id="fu" accept=".xlsx,.xls"><p id="msg"></p></div>
+<div class="box"><h3 style="margin-top:0">Publish to GitHub – update the dashboard for everyone</h3>
+<p style="color:#555;font-size:13px">Choose the new Excel here. The dashboard checks it, shows it, and saves it into your GitHub project, so every public visitor gets it (GitHub Pages / Netlify republish automatically, and open pages re-check every 2 minutes).</p>
+<div class="gh"><label>GitHub repository<input id="ghr" placeholder="owner/repository"></label><label>Branch<input id="ghb" value="main"></label><label>Excel file in the repository<input id="ghf" value="HOSO_Dashboard.xlsx"></label><label>GitHub access token<input id="ght" type="password" autocomplete="off"></label></div>
+<label style="display:block;margin:8px 0"><input type="checkbox" id="ghk" checked> Remember these details on this computer</label>
+<input type="file" id="ghx" accept=".xlsx" style="display:none"><button class="b" style="background:#1f7a1f;border-color:#1f7a1f" onclick="ghx.click()">⬆ Choose Excel &amp; publish</button> <span id="ghm" style="margin-left:8px"></span>
+<p style="color:#666;font-size:12px;margin-top:10px">Create the token at GitHub → Settings → Developer settings → Personal access tokens → <b>Fine-grained tokens</b> → Generate new token. Under <b>Repository access</b> select only this repository, and under <b>Permissions → Contents</b> choose <b>Read and write</b>. Use it only on your own computer – anyone with the token can change your repository.</p>
+<hr style="border:0;border-top:1px solid var(--line);margin:12px 0"><h4 style="margin:0 0 4px;color:#8a0b16">Data currency note – shown at the bottom of the Dashboard, for everyone</h4>
+<p style="color:#555;font-size:13px;margin:0 0 6px">Edit the “As on” date and the footer notes (one per line; the last line is the slogan), then save them to <b>config.json</b> in your repository.</p>
 <div class="ctl"><label>“As on” date <input id="asin" oninput="M.asOn=this.value;sv();hd()"></label></div>
 <label>Footer notes (one per line)<br><textarea id="note" rows="5" style="width:100%" oninput="M.note=this.value;sv();ft()"></textarea></label>
-<div class="ctl" style="margin-top:8px"><button class="b g" onclick="clr()">Clear saved data (all zero)</button></div></div>
+<div style="margin-top:8px"><button class="b" style="background:#1f7a1f;border-color:#1f7a1f" onclick="ghNote()">⬆ Save note &amp; date to GitHub</button> <span id="ghn" style="margin-left:8px"></span></div></div>
 </section>
 </main></div></div>
 <div id="md" onclick="if(event.target==this)this.classList.remove('on')"><div id="mb"></div></div>
@@ -263,6 +271,33 @@ function show(t){document.querySelectorAll('.pane').forEach(p=>p.classList.toggl
  ({n0:()=>near(0),n1:()=>near(1),n2:()=>near(2),n3:()=>near(3),dash,ana,sub:subv,off:()=>office('off',0),nq:()=>office('nq',1),ver:vert,data:()=>{$('note').value=M.note}})[t]()}
 function go(){hd();show(Q.tab||'dash')}
 $('nav').innerHTML=TABS.map(t=>`<button data-t="${t[0]}" onclick="show('${t[0]}');document.body.classList.remove('so')">${t[2]} ${t[1]}</button>`).join('');
+
+/* ---------- Publish to GitHub ---------- */
+const GH={r:'ghr',b:'ghb',f:'ghf',t:'ght'};
+function ghLoad(){let s={};try{s=JSON.parse(localStorage.getItem('pwHOSOgh'))||{}}catch(e){}
+ const host=location.hostname,seg=location.pathname.split('/')[1];const dr=/\.github\.io$/.test(host)&&seg?host.split('.')[0]+'/'+seg:'tejasparmar7855-hash/HOSOPostalWarrior2026-27';
+ $('ghr').value=s.r||dr;$('ghb').value=s.b||'main';$('ghf').value=s.f||'HOSO_Dashboard.xlsx';$('ght').value=s.t||'';$('ghk').checked=s.k!==false}
+function ghSave(){try{localStorage.setItem('pwHOSOgh',$('ghk').checked?JSON.stringify({r:$('ghr').value,b:$('ghb').value,f:$('ghf').value,t:$('ght').value,k:true}):JSON.stringify({k:false}))}catch(e){}}
+const b64=u8=>{let s='';for(let i=0;i<u8.length;i+=32768)s+=String.fromCharCode.apply(null,u8.subarray(i,i+32768));return btoa(s)};
+const u64=s=>btoa(unescape(encodeURIComponent(s)));
+async function ghApi(path,method,body){const r=$('ghr').value.trim(),tk=$('ght').value.trim();if(!r||!tk)throw new Error('Enter the repository and the access token first.');
+ const res=await fetch('https://api.github.com/repos/'+r+'/contents/'+path.split('/').map(encodeURIComponent).join('/')+(method=='GET'?'?ref='+encodeURIComponent($('ghb').value.trim()||'main'):''),{method,headers:{Authorization:'Bearer '+tk,Accept:'application/vnd.github+json'},body:body?JSON.stringify(body):undefined});
+ if(res.status==404&&method=='GET')return null;
+ if(!res.ok){let m='';try{m=(await res.json()).message}catch(e){}throw new Error(res.status==401?'GitHub rejected the token (401). Check the token.':res.status==403||res.status==404?'No permission (403/404). The token needs Contents → Read and write on this repository.':'GitHub error '+res.status+' '+m)}
+ return res.json()}
+async function ghPut(path,content,msg){const br=$('ghb').value.trim()||'main',cur=await ghApi(path,'GET');return ghApi(path,'PUT',{message:msg,content,branch:br,...(cur&&cur.sha?{sha:cur.sha}:{})})}
+async function ghCfg(extra){let c={};try{const cur=await ghApi('config.json','GET');if(cur&&cur.content)c=JSON.parse(decodeURIComponent(escape(atob(cur.content.replace(/\n/g,'')))))}catch(e){if(/token|permission/i.test(e.message))throw e}
+ return Object.assign(c,extra)}
+$('ghx').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;const m=$('ghm');ghSave();
+ try{m.textContent='Checking '+f.name+' …';const buf=await f.arrayBuffer(),x=parse(XLSX.read(buf,{type:'array'}));if(!x.length)throw new Error('No office rows found – the file needs the HO Details and SO Details sheets.');
+  const h=x.filter(r=>r.t=='HO').length;if(!h||x.length-h<1)throw new Error('The file must contain both HO Details and SO Details rows (found '+h+' HO, '+(x.length-h)+' SO).');
+  if(!confirm('Publish '+f.name+' ('+x.length+' offices: '+h+' HO, '+(x.length-h)+' SO) to GitHub for all visitors?'))throw new Error('Cancelled.');
+  m.textContent='Publishing to GitHub …';await ghPut($('ghf').value.trim()||'HOSO_Dashboard.xlsx',b64(new Uint8Array(buf)),'Update dashboard data ('+f.name+')');
+  const at=nowS(),cfg=await ghCfg({updatedAt:at,file:$('ghf').value.trim().split('/').pop()});await ghPut('config.json',u64(JSON.stringify(cfg,null,2)),'Update data timestamp');
+  D=x;M.file=cfg.file;M.upAt=at;M.time=new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'}).toUpperCase();sv();go();
+  m.innerHTML='✅ Published '+x.length+' offices. GitHub Pages / Netlify will show it to everyone in 1–2 minutes.'}catch(er){m.textContent='❌ '+er.message}};
+async function ghNote(){const m=$('ghn');ghSave();try{m.textContent='Saving …';const cfg=await ghCfg({note:M.note,asOn:M.asOn,time:M.time});await ghPut('config.json',u64(JSON.stringify(cfg,null,2)),'Update dashboard note and date');m.textContent='✅ Saved. Visitors will see it in 1–2 minutes.'}catch(er){m.textContent='❌ '+er.message}}
+ghLoad();
 let SIG='';
 async function remote(first){try{const bust='?t='+Date.now();const [c,x]=await Promise.all([fetch('config.json'+bust,{cache:'no-store'}).then(r=>r.ok?r.json():{}).catch(()=>({})),fetch('HOSO_Dashboard.xlsx'+bust,{cache:'no-store'})]);if(!x.ok)throw 0;
  const buf=await x.arrayBuffer(),sig=(x.headers.get('etag')||'')+buf.byteLength+JSON.stringify(c);if(sig===SIG)return;SIG=sig;D=parse(XLSX.read(buf,{type:'array'}));
